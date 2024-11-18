@@ -1,0 +1,496 @@
+/*
+ * Tetris Game Styles
+ * This file contains all the styling for the Tetris game, including:
+ * - Game board and UI elements
+ * - Animated background effects
+ * - Responsive design adjustments
+ * - Color schemes and visual effects
+ */
+
+/* Color Variables
+ * Defines the main color scheme used throughout the game
+ * These colors match traditional Tetris piece colors
+ */
+:root {
+    --bg-color: #1a1a1a;
+    --grid-color: #2a2a2a;
+    --block-size: 30px;
+    --cyan: #00f0f0;    /* I piece */
+    --blue: #0000f0;    /* J piece */
+    --orange: #f0a000;  /* L piece */
+    --yellow: #f0f000;  /* O piece */
+    --green: #00f000;   /* S piece */
+    --purple: #a000f0;  /* T piece */
+    --red: #f00000;     /* Z piece */
+}
+
+/* Background Gradient Animation
+ * Creates a smooth, continuous movement of the rainbow gradient
+ * Uses three overlapping gradients for a more complex effect
+ */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Falling Block Animation
+ * Defines the animation for background decorative Tetris pieces
+ * Includes rotation for additional visual interest
+ */
+@keyframes blockFall {
+    0% { transform: translateY(-60px) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+
+/* Base Body Styles
+ * Sets up the main container and ensures full viewport coverage
+ */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #000000;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Rainbow Gradient Background
+ * Creates a vibrant, animated background using multiple gradient layers
+ * Extended beyond viewport to prevent edge artifacts
+ */
+.gradient-overlay {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    z-index: 0;
+    background: linear-gradient(217deg,
+        rgba(255, 0, 128, 0.6),   /* Neon Pink */
+        rgba(255, 94, 0, 0.6),    /* Pure Orange */
+        rgba(255, 255, 0, 0.6),   /* Pure Yellow */
+        rgba(0, 255, 0, 0.6),     /* Pure Green */
+        rgba(0, 255, 255, 0.6),   /* Pure Cyan */
+        rgba(0, 128, 255, 0.6),   /* Electric Blue */
+        rgba(255, 0, 255, 0.6),   /* Pure Magenta */
+        rgba(255, 0, 128, 0.6)    /* Back to Neon Pink */
+    ),
+    linear-gradient(127deg,
+        rgba(255, 0, 128, 0.6),   /* Neon Pink */
+        rgba(255, 94, 0, 0.6),    /* Pure Orange */
+        rgba(255, 255, 0, 0.6),   /* Pure Yellow */
+        rgba(0, 255, 0, 0.6),     /* Pure Green */
+        rgba(0, 255, 255, 0.6),   /* Pure Cyan */
+        rgba(0, 128, 255, 0.6),   /* Electric Blue */
+        rgba(255, 0, 255, 0.6),   /* Pure Magenta */
+        rgba(255, 0, 128, 0.6)    /* Back to Neon Pink */
+    ),
+    linear-gradient(336deg,
+        rgba(255, 0, 128, 0.6),   /* Neon Pink */
+        rgba(255, 94, 0, 0.6),    /* Pure Orange */
+        rgba(255, 255, 0, 0.6),   /* Pure Yellow */
+        rgba(0, 255, 0, 0.6),     /* Pure Green */
+        rgba(0, 255, 255, 0.6),   /* Pure Cyan */
+        rgba(0, 128, 255, 0.6),   /* Electric Blue */
+        rgba(255, 0, 255, 0.6),   /* Pure Magenta */
+        rgba(255, 0, 128, 0.6)    /* Back to Neon Pink */
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 24s ease infinite;
+    transform: scale(1.5);
+}
+
+/* Background Pattern Container
+ * Holds the falling Tetris pieces in the background
+ */
+.background-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Falling Blocks Container
+ * Contains the animated Tetris pieces
+ */
+.falling-blocks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Individual Falling Block
+ * Styles for each animated Tetris piece in the background
+ */
+.falling-block {
+    position: absolute;
+    opacity: 0.6;
+    animation: blockFall linear forwards;
+}
+
+/* Tetris Shape Grid
+ * Creates the grid structure for Tetris pieces
+ */
+.tetris-shape {
+    display: grid;
+    gap: 1px;
+}
+
+/* Individual Cell in Tetris Shape
+ * Styles for each cell within a Tetris piece
+ */
+.shape-cell {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Title Styles
+ * Customizes the game title's appearance
+ */
+.game-title {
+    font-size: 4em;
+    margin: 20px 0 40px;
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+}
+
+.game-title span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-title span:hover {
+    transform: scale(1.2) rotate(5deg);
+    text-shadow: 0 0 10px currentColor;
+}
+
+.game-title {
+    font-size: 4em;
+    margin: 20px 0 40px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.game-title span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.game-title span:hover {
+    transform: scale(1.2) rotate(5deg);
+    animation: glow 1s ease-in-out infinite;
+}
+
+/* Game Container Styles
+ * Sets up the main game container
+ */
+.game-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative;
+    z-index: 3;
+}
+
+/* Game Area Container Styles
+ * Holds the game area and related elements
+ */
+.game-area-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Game Area Styles
+ * Customizes the game area's appearance
+ */
+#gameArea {
+    width: 300px;
+    height: 600px;
+    border: 2px solid #333;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Game Controls Styles
+ * Customizes the game controls' appearance
+ */
+.game-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 24px;
+    font-size: 1.1em;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover:not(:disabled) {
+    background-color: #666;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #333;
+}
+
+/* Controls Info Styles
+ * Customizes the controls info section's appearance
+ */
+.controls-info {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.controls-info p {
+    margin: 5px 0;
+    color: #888;
+    font-size: 0.9em;
+}
+
+/* Info Panel Styles
+ * Customizes the info panel's appearance
+ */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Next Piece Container Styles
+ * Holds the next piece preview
+ */
+.next-piece-container {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Next Piece Styles
+ * Customizes the next piece preview's appearance
+ */
+#nextPiece {
+    width: 120px;
+    height: 120px;
+    background-color: #000;
+    margin-top: 10px;
+    position: relative;
+    border: 1px solid #333;
+}
+
+/* Scoreboard Styles
+ * Customizes the scoreboard's appearance
+ */
+.scoreboard {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.score-item {
+    margin-bottom: 15px;
+}
+
+.score-label {
+    font-size: 1.2em;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.score-value {
+    font-size: 1.8em;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Block Styles
+ * Customizes the individual block's appearance
+ */
+.block {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+    transition: transform 0.1s, left 0.1s, top 0.1s;
+}
+
+/* Next Block Styles
+ * Customizes the next block's appearance
+ */
+.next-block {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+}
+
+/* High Scores Styles
+ * Customizes the high scores section's appearance
+ */
+.high-scores {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+}
+
+.high-scores h2 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #888;
+}
+
+.high-scores ol {
+    margin: 0;
+    padding-left: 25px;
+}
+
+.high-scores li {
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+/* Flash Line Animation
+ * Creates a flashing effect for cleared lines
+ */
+@keyframes flashLine {
+    0% { background-color: #fff; }
+    100% { background-color: transparent; }
+}
+
+.flash {
+    animation: flashLine 0.2s;
+}
+
+/* Ghost Piece Styles
+ * Customizes the ghost piece's appearance
+ */
+.ghost-piece {
+    opacity: 0.2;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+/* Game Paused Styles
+ * Customizes the game paused overlay's appearance
+ */
+.game-paused::after {
+    content: 'PAUSED';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Game Container Styles (Alternative)
+ * Sets up an alternative game container with a dark background
+ */
+.game-container {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Controls Display Panel
+ * Fixed panel showing keyboard controls
+ * Positioned on the left side of the screen
+ */
+.controls-display {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+}
+
+.controls-display h2 {
+    color: #fff;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    color: #fff;
+}
+
+.control-item .key {
+    background-color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-right: 15px;
+    min-width: 60px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 0.9em;
+    border: 1px solid #555;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-item span:last-child {
+    color: #aaa;
+    font-size: 0.9em;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Tetris Game</title>
+    <!-- Google Fonts - Press Start 2P for retro gaming feel -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="tetrisStyles.css">
+</head>
+<body>
+    <!-- Rainbow Gradient Background -->
+    <div class="gradient-overlay"></div>
+    
+    <!-- Falling Blocks Background -->
+    <div class="background-pattern">
+        <div id="fallingBlocks" class="falling-blocks"></div>
+    </div>
+    
+    <!-- Controls Display Panel -->
+    <div class="controls-display">
+        <h2>Controls</h2>
+        <div class="control-item">
+            <span class="key">Enter</span>
+            <span>Start Game</span>
+        </div>
+        <div class="control-item">
+            <span class="key">←</span>
+            <span>Move Left</span>
+        </div>
+        <div class="control-item">
+            <span class="key">→</span>
+            <span>Move Right</span>
+        </div>
+        <div class="control-item">
+            <span class="key">↑</span>
+            <span>Rotate</span>
+        </div>
+        <div class="control-item">
+            <span class="key">↓</span>
+            <span>Soft Drop</span>
+        </div>
+        <div class="control-item">
+            <span class="key">Space</span>
+            <span>Hard Drop</span>
+        </div>
+        <div class="control-item">
+            <span class="key">P</span>
+            <span>Pause</span>
+        </div>
+    </div>
+    
+    <!-- Game Title -->
+    <h1 class="game-title">
+        <span style="color: var(--cyan)">T</span>
+        <span style="color: var(--orange)">E</span>
+        <span style="color: var(--purple)">T</span>
+        <span style="color: var(--red)">R</span>
+        <span style="color: var(--green)">I</span>
+        <span style="color: var(--blue)">S</span>
+    </h1>
+    
+    <!-- Main Game Container -->
+    <div class="game-container">
+        <!-- Game Area and Controls -->
+        <div class="game-area-container">
+            <div id="gameArea"></div>
+            <div class="game-controls">
+                <button id="startButton">Start Game</button>
+                <button id="pauseButton" disabled>Pause</button>
+                <button id="resetButton" disabled>Reset</button>
+            </div>
+        </div>
+        
+        <!-- Game Info Panel -->
+        <div class="info-panel">
+            <!-- Next Piece Preview -->
+            <div class="next-piece-container">
+                <h2>Next Piece</h2>
+                <div id="nextPiece"></div>
+            </div>
+            <!-- Score Display -->
+            <div class="scoreboard">
+                <div class="score-item">
+                    <h3>Score</h3>
+                    <div id="score">0</div>
+                </div>
+                <div class="score-item">
+                    <h3>Lines</h3>
+                    <div id="lines">0</div>
+                </div>
+                <div class="score-item">
+                    <h3>Level</h3>
+                    <div id="level">1</div>
+                </div>
+                <!-- High Scores -->
+                <div class="high-scores">
+                    <h3>High Scores</h3>
+                    <div id="highScores"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Scripts -->
+    <script src="tetrisBackground.js"></script>
+    <script src="tetrisGame.js"></script>
+</body>
+</html>
